@@ -1,0 +1,19 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: tr-edge-service
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: catalog
+              uri: ${CATALOG_URI:http://localhost:9002}
+              predicates:
+                - Path=/api/books/**
+            - id: search
+              uri: ${SEARCH_URI:http://localhost:9003}
+              predicates:
+                - Path=/api/search/**
