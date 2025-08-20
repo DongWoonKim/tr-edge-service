@@ -9,11 +9,22 @@ spring:
       server:
         webflux:
           routes:
+            - id: auth
+              uri: ${AUTH_URI:http://localhost:9001}
+              predicates:
+                - Path=/api/users/**, /api/auth/**
             - id: catalog
               uri: ${CATALOG_URI:http://localhost:9002}
               predicates:
                 - Path=/api/books/**
+              filters:
+                - name: PreGatewayFilter
             - id: search
               uri: ${SEARCH_URI:http://localhost:9003}
               predicates:
                 - Path=/api/search/**
+              filters:
+                - name: PreGatewayFilter
+
+services:
+  auth-service-url: ${AUTH_SERVICE_URL:http://localhost:9001}
