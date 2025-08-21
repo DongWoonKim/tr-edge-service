@@ -27,4 +27,4 @@ spring:
                 - name: PreGatewayFilter
 
 services:
-  auth-service-url: ${AUTH_SERVICE_URL:http://localhost:9001}
+  auth-service-url: ${AUTH_URI:http://localhost:9001}
